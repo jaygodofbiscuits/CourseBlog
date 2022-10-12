@@ -7,6 +7,7 @@
  *
  * http://ReactiveRaven.github.com/jqBootstrapValidation/
  */
+//Editing file git fetch/pull test
 
 (function($) {
 
