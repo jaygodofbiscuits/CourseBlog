@@ -59,32 +59,32 @@ def load_user(user_id):
 
 
 ##CONFIGURE TABLES
-# class BlogPost(db.Model):
-#     __tablename__ = "blog_posts"
-#     id = db.Column(db.Integer, primary_key=True)
-#     author = db.Column(db.String(250), nullable=False)
-#     title = db.Column(db.String(250), unique=True, nullable=False)
-#     subtitle = db.Column(db.String(250), nullable=False)
-#     date = db.Column(db.String(250), nullable=False)
-#     body = db.Column(db.Text, nullable=False)
-#     img_url = db.Column(db.String(250), nullable=False)
-#     author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-#     author = relationship(
-#         "User", back_populates="posts"
-#     )  ## back_populates references posts in User and vice versa
-#     comments = relationship("Comment", back_populates="b_post")
+class BlogPost(db.Model):
+    __tablename__ = "blog_posts"
+    id = db.Column(db.Integer, primary_key=True)
+    author = db.Column(db.String(250), nullable=False)
+    title = db.Column(db.String(250), unique=True, nullable=False)
+    subtitle = db.Column(db.String(250), nullable=False)
+    date = db.Column(db.String(250), nullable=False)
+    body = db.Column(db.Text, nullable=False)
+    img_url = db.Column(db.String(250), nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    author = relationship(
+        "User", back_populates="posts"
+    )  ## back_populates references posts in User and vice versa
+    comments = relationship("Comment", back_populates="b_post")
 
 
-# class User(UserMixin, db.Model):
-#     __tablename__ = "users"
-#     id = db.Column(db.Integer, primary_key=True)
-#     email = db.Column(db.String(100), unique=True, nullable=False)
-#     password_hash = db.Column(db.String(250), nullable=False)
-#     name = db.Column(db.String(100), nullable=False)
-#     posts = relationship(
-#         "BlogPost", back_populates="author"
-#     )  ## back_populates references author in BlogPost and vice versa
-#     comments = relationship("Comment", back_populates="author")
+class User(UserMixin, db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password_hash = db.Column(db.String(250), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    posts = relationship(
+        "BlogPost", back_populates="author"
+    )  ## back_populates references author in BlogPost and vice versa
+    comments = relationship("Comment", back_populates="author")
 
 
 class Comment(UserMixin, db.Model):
@@ -97,7 +97,7 @@ class Comment(UserMixin, db.Model):
     b_post = relationship("BlogPost", back_populates="comments")
 
 
-db.create_all()
+# db.create_all()
 
 ##CREATE THE ADMIN ONLY WRAPPER FUNCTION
 def admin_only(f):
