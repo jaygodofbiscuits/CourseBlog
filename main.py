@@ -97,7 +97,7 @@ class Comment(UserMixin, db.Model):
     b_post = relationship("BlogPost", back_populates="comments")
 
 
-# db.create_all()
+db.create_all()
 
 ##CREATE THE ADMIN ONLY WRAPPER FUNCTION
 def admin_only(f):
